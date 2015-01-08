@@ -11,34 +11,8 @@ anty robot: funkcja losuj¹ca znaki, lub liczby (dajmy na to 6 znaków)  */
 
 using namespace std;
 
-struct TUczen
-{
-    int Nr_z_dziennika;
-    char Imie[20];
-    char Nazwisko[20];
-    struct
-    {
-        int Rok;
-        unsigned short Miesiac;
-        unsigned short Dzien;
-    }Data_urodzin;
-    struct
-    {
-        int Rocznik;
-        char Grupa;
-    }Klasa;
-    int Oceny;
-
-};
-struct TUczen Uczen;
-
-struct TWylosowane
-{
     int cyfry_losowane[6];
     char litera[6];
-
-};
-struct TWylosowane Wylosowane;
 
 void kod_losowany()
 {
@@ -52,7 +26,7 @@ void kod_losowany()
 
     for(int i=0; i<ile_cyfr; i++) //losuje liczby
     {
-        Wylosowane.cyfry_losowane[i]=rand()% 10;
+        cyfry_losowane[i]=rand()% 10;
     }
 
     for(int i=0; i<ile_liter; i++) //losuje litery
@@ -62,12 +36,13 @@ void kod_losowany()
 
     for(int i=0; i<30; i++)
     {
+        int n=0;
         liczba_litera=rand()% 2;
         if(liczba_litera==1)
         {
             if(ile_cyfr>licznik_cyfr)
             {
-                cout << Wylosowane.cyfry_losowane[licznik_cyfr];
+                cout << cyfry_losowane[licznik_cyfr];
                 licznik_cyfr++;
             }
         }
@@ -75,11 +50,12 @@ void kod_losowany()
         {
             if(ile_liter>licznik_liter)
             {
-                Wylosowane.litera[licznik_liter] = litery_losowane[licznik_liter];
-                cout << Wylosowane.litera[licznik_liter];
+                litera[licznik_liter] = litery_losowane[licznik_liter];
+                cout << litera[licznik_liter];
                 licznik_liter++;
             }
         }
+        n++;
     }
 }
 
@@ -95,24 +71,21 @@ void wprowadzanie_danych()
     kod_losowany();
     cout << " Tutaj -> ";
     cin >> kod_wpisany;
-    if(kod_wpisany==Wylosowane) cout << "Udalo sie!";
 
     for(int i=0; i<6; i++)
     {
-        //cout << litera[a];
-        if(kod_wpisany[i]==Wylosowane.litera[a])
+        if(kod_wpisany[i]==litera[a])
         {
-            cout << Wylosowane.litera[a];
+            cout << litera[a];
             poprawnosc++;
             a++;
         }
-        if(kod_wpisany[i]== Wylosowane.cyfry_losowane[b])
+        if(kod_wpisany[i]== cyfry_losowane[b])
         {
-            cout << Wylosowane.cyfry_losowane[b];
+            cout << cyfry_losowane[b];
             poprawnosc++;
             b++;
         }
-    //cout << poprawnosc << endl;
     }
     if(poprawnosc==6) cout << "Kod poprawny" << endl;
         else{ cout << "Kod przepisany blednie!" << endl;}
